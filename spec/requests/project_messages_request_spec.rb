@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe "ProjectMessages", type: :request do
 
   describe 'POST /project_messages' do
-    let(:project) { create(:project, uuid: SecureRandom.uuid) }
+    let(:project) { create(:project) }
 
     context 'when the request is valid' do
-      before { post '/project_messages', params: { key: 7, project_id: project.uuid, message_id: 798 } }
+      before { post '/project_messages', params: { key: 7, project_id: project.id, message_id: 798 } }
 
       it 'creates a project_message' do
         expect(JSON.parse(response.body)['key']).to eq(7)
@@ -18,7 +18,7 @@ RSpec.describe "ProjectMessages", type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/project_messages', params: { key: '', project_id: project.uuid, message_id: 6 } }
+      before { post '/project_messages', params: { key: '', project_id: project.id, message_id: 6 } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)

@@ -1,0 +1,3 @@
+check_complete_project:
+  cron: "*/1 * * * *"
+  class: "CompleteProjectMessageJob"
